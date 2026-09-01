@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Driven Backend Engineer — System Design Roadmap</title>
+<meta name="description" content="A deep, opinionated roadmap for senior backend and AI-infrastructure engineers: distributed systems fundamentals, data, resilience, LLM serving, RAG, agents and AI platform operations — with the reasoning behind every component.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="AI-Driven Backend Engineer — System Design Roadmap">
+<meta property="og:description" content="From the request path to KV caches. Every component, why it exists, how it fails, and what a senior engineer is expected to say about it.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231a5f9e'/><path d='M26 68V32h12l12 22 12-22h12v36H62V48L52 66h-4L38 48v20z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#/">
+      <span class="brand-mark">AI·BE</span>
+      <span class="brand-txt">
+        <b>AI-Driven Backend Engineer</b>
+        <i>System design, end to end</i>
+      </span>
+    </a>
+
+    <nav class="page-nav">
+      <a href="index.html" class="on">Roadmap</a>
+      <a href="plan.html">15-Day Plan</a>
+    </nav>
+
+    <div class="topbar-progress" title="Overall completion">
+      <div class="tp-bar"><span id="tpFill"></span></div>
+      <span class="tp-num" id="tpNum">0%</span>
+    </div>
+
+    <nav class="topbar-actions">
+      <button class="btn" id="btnSearch" title="Search topics ( / )">
+        <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13.5 13.5 18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>Search</span><kbd>/</kbd>
+      </button>
+      <button class="btn" id="btnProgress" title="Progress, export and reset">Progress</button>
+      <button class="btn icon" id="btnTheme" title="Toggle theme" aria-label="Toggle theme">
+        <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A6 6 0 0 1 10 2.5z" fill="currentColor"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="topbar-rule"></div>
+</header>
+
+<div class="shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="side-in">
+      <div class="side-lede">
+        <p><b id="partCount">—</b> parts, <b id="nodeCount">—</b> topics. Read it as a path, or jump to what you are about to build.</p>
+      </div>
+      <div class="legend">
+        <span><i class="dot core"></i> Core</span>
+        <span><i class="dot deep"></i> Depth</span>
+        <span><i class="dot opt"></i> Optional</span>
+      </div>
+      <nav id="sideNav" class="side-nav" aria-label="Roadmap sections"></nav>
+      <div class="side-foot">
+        <button class="linkish" id="btnExpandAll">Expand all</button>
+        <button class="linkish" id="btnCollapseAll">Collapse all</button>
+      </div>
+      <div class="side-plan">
+        <a href="plan.html">
+          <b>Follow the 15-day plan →</b>
+          <span id="sidePlanPct">Three weeks, five working days each</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main id="main" class="main">
+    <section class="hero">
+      <p class="eyebrow">Engineering reference · Living roadmap</p>
+      <h1>System design for the engineer who now also owns the model.</h1>
+      <p class="lede">
+        Two skill sets have quietly merged. The person who used to be asked
+        <em>“how would you shard this table”</em> is now also asked
+        <em>“why is your p95 time-to-first-token 4 seconds and your GPU bill
+        forty thousand dollars a month.”</em> This roadmap covers both halves as
+        one subject, because in production they are one subject.
+      </p>
+      <p class="lede">
+        Every topic answers the same four questions: <b>what it is</b>,
+        <b>why it exists</b> (the problem that forced someone to invent it),
+        <b>how it fails</b>, and <b>what a senior engineer is expected to say
+        about it out loud</b>. Diagrams are schematic — they show the control
+        flow that matters, not a deployment topology.
+      </p>
+
+      <div class="hero-stats">
+        <div><b id="statParts">—</b><span>parts</span></div>
+        <div><b id="statNodes">—</b><span>topics</span></div>
+        <div><b id="statQs">—</b><span>“why” questions</span></div>
+        <div><b id="statRefs">—</b><span>references</span></div>
+        <div><b id="statRead">—</b><span>reading time</span></div>
+        <div><b id="statDeep">—</b><span>if you go deep</span></div>
+      </div>
+
+      <div class="hero-note">
+        <h4>How to read this</h4>
+        <ul>
+          <li>Tick a topic when you could <em>explain it to someone else, including its failure modes</em> — not when you have read it. Progress is stored in this browser.</li>
+          <li>Parts 01–10 are the classical distributed-systems core. Parts 11–15 are the AI infrastructure layer. Part 16 is where you rehearse both together, and Part 17 is what to read next.</li>
+          <li>One theme recurs throughout: <b>bound your resources, make operations idempotent, and make failure explicit rather than silent.</b></li>
+          <li><b>Every time estimate is computed from the content</b>, not guessed. <i>Read</i> is a careful first pass at 170 words a minute, plus time to study each diagram and to attempt each question before reading its answer. <i>Deep</i> is the optional extra: following the references, running the checklist against a system you own, and typing out the code.</li>
+        </ul>
+      </div>
+
+      <aside class="plan-cta" id="planCta"></aside>
+    </section>
+
+    <div id="roadmap" class="roadmap"></div>
+
+    <footer class="foot">
+      <p><b>A closing note.</b> Every component in this roadmap is also a new failure domain. Add each one because a measured problem demands it, not because the architecture diagram looks incomplete without it. The same rule now applies to models, vector indexes and agents.</p>
+      <p class="foot-meta">Progress is kept locally in your browser. Nothing is uploaded. Prefer a schedule? <a href="plan.html">Take the 15-day plan</a>.</p>
+    </footer>
+  </main>
+</div>
+
+<!-- Topic detail drawer -->
+<div class="drawer-scrim" id="scrim" hidden></div>
+<article class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="drawerTitle" tabindex="-1">
+  <header class="drawer-head">
+    <div class="dh-left">
+      <span class="crumb" id="drawerCrumb"></span>
+      <h2 id="drawerTitle"></h2>
+      <div class="drawer-time" id="drawerTime"></div>
+    </div>
+    <div class="dh-right">
+      <button class="btn mark" id="btnMark">Mark done</button>
+      <button class="btn icon" id="btnClose" aria-label="Close">✕</button>
+    </div>
+  </header>
+  <div class="drawer-body" id="drawerBody"></div>
+  <footer class="drawer-foot">
+    <button class="btn ghost" id="btnPrev">← Previous</button>
+    <button class="btn ghost" id="btnNext">Next →</button>
+  </footer>
+</article>
+
+<!-- Search palette -->
+<div class="palette-scrim" id="palScrim" hidden></div>
+<div class="palette" id="palette" hidden role="dialog" aria-label="Search topics">
+  <input id="palInput" type="text" placeholder="Search topics, concepts, failure modes…" autocomplete="off" spellcheck="false">
+  <div class="pal-results" id="palResults"></div>
+  <div class="pal-foot"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>↵</kbd> open · <kbd>esc</kbd> close</div>
+</div>
+
+<!-- Progress sheet -->
+<div class="palette-scrim" id="progScrim" hidden></div>
+<div class="progress-sheet" id="progSheet" hidden role="dialog" aria-label="Progress">
+  <h3>Your progress</h3>
+  <div id="progBreakdown" class="prog-breakdown"></div>
+  <div class="prog-actions">
+    <button class="btn" id="btnExport">Export progress</button>
+    <label class="btn" for="importFile">Import progress</label>
+    <input type="file" id="importFile" accept="application/json" hidden>
+    <button class="btn danger" id="btnReset">Reset all</button>
+  </div>
+  <p class="prog-hint">Export gives you a small JSON file. Import it in another browser to carry your ticks across.</p>
+</div>
+
+<script src="assets/js/core.js?v=9"></script>
+<script src="assets/js/diagrams.js?v=9"></script>
+<script src="assets/js/diagrams-ai.js?v=9"></script>
+<script src="assets/js/data/01-foundations.js?v=9"></script>
+<script src="assets/js/data/02-networking.js?v=9"></script>
+<script src="assets/js/data/03-data.js?v=9"></script>
+<script src="assets/js/data/04-distributed-data.js?v=9"></script>
+<script src="assets/js/data/05-caching.js?v=9"></script>
+<script src="assets/js/data/06-async.js?v=9"></script>
+<script src="assets/js/data/07-resilience.js?v=9"></script>
+<script src="assets/js/data/08-architecture.js?v=9"></script>
+<script src="assets/js/data/09-security.js?v=9"></script>
+<script src="assets/js/data/10-observability.js?v=9"></script>
+<script src="assets/js/data/11-ai-foundations.js?v=9"></script>
+<script src="assets/js/data/12-inference-infra.js?v=9"></script>
+<script src="assets/js/data/13-rag.js?v=9"></script>
+<script src="assets/js/data/14-agents.js?v=9"></script>
+<script src="assets/js/data/15-ai-platform.js?v=9"></script>
+<script src="assets/js/data/16-ai-architecture.js?v=9"></script>
+<script src="assets/js/data/17-drills.js?v=9"></script>
+<script src="assets/js/data/18-shelf.js?v=9"></script>
+<script src="assets/js/time.js?v=9"></script>
+<script src="assets/js/plan.js?v=9"></script>
+<script src="assets/js/app.js?v=9"></script>
+</body>
+</html>

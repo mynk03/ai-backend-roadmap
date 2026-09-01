@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15-Day Plan — AI-Driven Backend Engineer Roadmap</title>
+<meta name="description" content="A fifteen-day schedule through the AI-driven backend engineer roadmap: three weeks, five working days each, with a build exercise and a spoken drill every day.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231a5f9e'/><path d='M26 68V32h12l12 22 12-22h12v36H62V48L52 66h-4L38 48v20z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">AI·BE</span>
+      <span class="brand-txt">
+        <b>AI-Driven Backend Engineer</b>
+        <i>System design, end to end</i>
+      </span>
+    </a>
+
+    <nav class="page-nav">
+      <a href="index.html">Roadmap</a>
+      <a href="plan.html" class="on">15-Day Plan</a>
+    </nav>
+
+    <div class="topbar-progress" title="Plan completion">
+      <div class="tp-bar"><span id="tpFill"></span></div>
+      <span class="tp-num" id="tpNum">0%</span>
+    </div>
+
+    <nav class="topbar-actions">
+      <button class="btn" id="btnStart" title="Set a start date to get calendar dates">Set start date</button>
+      <button class="btn" id="btnProgress">Progress</button>
+      <button class="btn icon" id="btnTheme" title="Toggle theme" aria-label="Toggle theme">
+        <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M10 2.5a7.5 7.5 0 1 0 7.5 7.5A6 6 0 0 1 10 2.5z" fill="currentColor"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="topbar-rule"></div>
+</header>
+
+<div class="shell">
+
+  <aside class="sidebar">
+    <div class="side-in">
+      <div class="side-lede">
+        <p>Fifteen working days. <b id="topicTotal">—</b> topics, a build exercise every day, and a drill you say out loud.</p>
+      </div>
+      <div class="legend">
+        <span><i class="dot core"></i> Done</span>
+        <span><i class="dot deep" style="background:var(--amber)"></i> Started</span>
+        <span><i class="dot opt"></i> Not begun</span>
+      </div>
+      <nav id="dayNav" class="side-nav" aria-label="Days"></nav>
+      <div class="side-foot">
+        <button class="linkish" id="btnToday">Jump to next unfinished</button>
+      </div>
+    </div>
+  </aside>
+
+  <main id="main" class="main">
+    <section class="hero">
+      <p class="eyebrow">Three weeks · five working days each</p>
+      <h1>Fifteen days, in the order the ideas actually depend on each other.</h1>
+      <p class="lede">
+        The roadmap is a reference; this is a schedule. Each day is three to six
+        hours: a set of topics, one thing you build with your hands, and a drill
+        you answer out loud. The building and the speaking are not optional
+        extras — they are the parts that convert recognition into competence.
+      </p>
+      <p class="lede">
+        Topic ticks are shared with the roadmap, so anything you complete on
+        either page counts on both. Everything is stored in this browser.
+      </p>
+
+      <div class="hero-stats">
+        <div><b>15</b><span>days</span></div>
+        <div><b id="statTopics">—</b><span>topics</span></div>
+        <div><b id="statPlanned">—</b><span>hours, planned</span></div>
+        <div><b id="statPerDay">—</b><span>per day, average</span></div>
+        <div><b id="statDone">0</b><span>days complete</span></div>
+      </div>
+
+      <div class="hero-note">
+        <h4>How to run it</h4>
+        <ul>
+          <li><b>Read, then build, then speak.</b> Reading alone produces the feeling of understanding and none of the substance. The build is short on purpose; the drill is where you find the gaps.</li>
+          <li><b>Do not skip week one</b> because it looks familiar. Every AI topic in weeks two and three refers back to it — backpressure, idempotency, timeouts, percentiles, tenancy.</li>
+          <li><b>Tick a topic when you could explain it to someone else, including its failure modes</b> — not when you have read it. A half-finished day honestly marked is worth more than a full one ticked out of momentum.</li>
+          <li><b>If you fall behind, drop the build before the drill.</b> Speaking an answer is the highest-return thirty minutes in the plan.</li>
+          <li><b>Every day already includes a buffer</b> of at least 45 minutes, and 35% on top of the focused time — for breaks, for re-reading the thing that did not land, and for the build that takes longer than it looks. The focused figure is the honest minimum; the planned figure is what to put in your calendar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div id="plan" class="plan"></div>
+
+    <footer class="foot">
+      <p><b>At the end of day fifteen</b>, the output is not the ticks. It is the list of things you still could not explain, and a specific plan for each one. Part 18 of the roadmap has three longer routes depending on which of those you care about most.</p>
+      <p class="foot-meta">Progress is kept locally in your browser. Nothing is uploaded.</p>
+    </footer>
+  </main>
+</div>
+
+<!-- Progress sheet -->
+<div class="palette-scrim" id="progScrim" hidden></div>
+<div class="progress-sheet" id="progSheet" hidden role="dialog" aria-label="Progress">
+  <h3>Plan progress</h3>
+  <div id="progBreakdown" class="prog-breakdown"></div>
+  <div class="prog-actions">
+    <button class="btn" id="btnExport">Export progress</button>
+    <label class="btn" for="importFile">Import progress</label>
+    <input type="file" id="importFile" accept="application/json" hidden>
+    <button class="btn danger" id="btnReset">Reset plan only</button>
+  </div>
+  <p class="prog-hint">Export includes both your topic ticks and your day-level progress. Resetting the plan clears build, check and drill boxes but keeps your topic ticks.</p>
+</div>
+
+<!-- Start date sheet -->
+<div class="palette-scrim" id="dateScrim" hidden></div>
+<div class="progress-sheet" id="dateSheet" hidden role="dialog" aria-label="Start date">
+  <h3>Set a start date</h3>
+  <p class="prog-hint" style="margin:0 0 14px">Each day maps to a working day, skipping weekends. Purely a planning aid — nothing enforces it.</p>
+  <input type="date" id="startDate" class="date-input">
+  <div class="prog-actions" style="margin-top:14px">
+    <button class="btn" id="btnSaveDate">Save</button>
+    <button class="btn" id="btnClearDate">Clear dates</button>
+  </div>
+</div>
+
+<script src="assets/js/core.js?v=9"></script>
+<script src="assets/js/data/01-foundations.js?v=9"></script>
+<script src="assets/js/data/02-networking.js?v=9"></script>
+<script src="assets/js/data/03-data.js?v=9"></script>
+<script src="assets/js/data/04-distributed-data.js?v=9"></script>
+<script src="assets/js/data/05-caching.js?v=9"></script>
+<script src="assets/js/data/06-async.js?v=9"></script>
+<script src="assets/js/data/07-resilience.js?v=9"></script>
+<script src="assets/js/data/08-architecture.js?v=9"></script>
+<script src="assets/js/data/09-security.js?v=9"></script>
+<script src="assets/js/data/10-observability.js?v=9"></script>
+<script src="assets/js/data/11-ai-foundations.js?v=9"></script>
+<script src="assets/js/data/12-inference-infra.js?v=9"></script>
+<script src="assets/js/data/13-rag.js?v=9"></script>
+<script src="assets/js/data/14-agents.js?v=9"></script>
+<script src="assets/js/data/15-ai-platform.js?v=9"></script>
+<script src="assets/js/data/16-ai-architecture.js?v=9"></script>
+<script src="assets/js/data/17-drills.js?v=9"></script>
+<script src="assets/js/data/18-shelf.js?v=9"></script>
+<script src="assets/js/time.js?v=9"></script>
+<script src="assets/js/plan.js?v=9"></script>
+<script src="assets/js/plan-app.js?v=9"></script>
+</body>
+</html>

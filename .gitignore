@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Tooling / agent state
+.claude/
+.code-review-graph/
+graphify-out/
+
+# Local scratch
+*.log
+tmp/
